@@ -4,17 +4,19 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import com.example.mytodolist.data.IMPORTANCE
+import com.example.mytodolist.data.TaskItem
 
-import com.example.mytodolist.placeholder.PlaceholderContent.PlaceholderItem
 import com.example.mytodolist.databinding.FragmentItemBinding
 
 /**
- * [RecyclerView.Adapter] that can display a [PlaceholderItem].
+ * [RecyclerView.Adapter] that can display a [TaskItem].
  * TODO: Replace the implementation with code for your data type.
  */
 class MyTaskRecyclerViewAdapter(
-    private val values: List<PlaceholderItem>
+    private val values: List<TaskItem>
 ) : RecyclerView.Adapter<MyTaskRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,18 +31,27 @@ class MyTaskRecyclerViewAdapter(
 
     }
 
+    //This method is responsible for fetching data for ViewHolders
+    // at given position in the list.
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.idView.text = item.id
-        holder.contentView.text = item.content
+        val resource = when(item.importance){
+            IMPORTANCE.LOW -> R.drawable.circle_drawable_green
+            IMPORTANCE.NORMAL -> R.drawable.circle_drawable_orange
+            IMPORTANCE.HIGH -> R.drawable.circle_drawable_red
+        }
+        holder.imgView.setImageResource(resource)
+        holder.contentView.text = item.title
     }
 
     override fun getItemCount(): Int = values.size
 
+    //This class is used to access the views of a single list item.
+    //In our case we have 3 elements (ImageView, TextView, rootView)
     inner class ViewHolder(binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        val idView: TextView = binding.itemNumber
+        val imgView: ImageView = binding.itemImg
         val contentView: TextView = binding.content
-
+        val itemContainer: View = binding.root
         override fun toString(): String {
             return super.toString() + " '" + contentView.text + "'"
         }
