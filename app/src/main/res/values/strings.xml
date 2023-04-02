@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">myToDoList</string>
     <string name="imgContentDescription">addButton</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="low">LOW</string>
+    <string name="normal">NORMAL</string>
+    <string name="high">HIGH</string>
+    <string name="savebutton">saveButton</string>
+    <string name="description">Description</string>
+    <string name="enter_task_detials">Enter task details</string>
+    <string name="title">Task title</string>
+    <string name="task_importance">Task importance</string>
 </resources>
