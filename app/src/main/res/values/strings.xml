@@ -11,4 +11,9 @@
     <string name="enter_task_detials">Enter task details</string>
     <string name="title">Task title</string>
     <string name="task_importance">Task importance</string>
+    <string name="default_task_title">Default title</string>
+    <string name="no_desc_msg">Default description</string>
+    <string name="display_importance">Display importance</string>
+    <string name="display_edit_button">Display edit</string>
+    <string name="textview">TextView</string>
 </resources>
