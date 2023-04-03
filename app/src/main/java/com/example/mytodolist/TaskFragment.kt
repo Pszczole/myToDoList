@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mytodolist.data.Tasks
 import com.example.mytodolist.databinding.FragmentItemListBinding
@@ -22,16 +23,18 @@ class TaskFragment : Fragment() {
         binding = FragmentItemListBinding.inflate(inflater, container, false)
 
         //Set the adapter
-        with(binding.list){
+        with(binding.list) {
             layoutManager = LinearLayoutManager(context)
             adapter = MyTaskRecyclerViewAdapter(Tasks.ITEMS)
         }
+
+        binding.addButton.setOnClickListener { addButtonClick() }
         return binding.root
     }
 
-        companion object {
+    private fun addButtonClick() {
+        findNavController().navigate(R.id.action_taskFragment_to_addTaskFragment)
 
-            // TODO: Customize parameter argument names
-            const val ARG_COLUMN_COUNT = "column-count"
-        }
+    }
+
 }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.navigation.fragment.findNavController
 import com.example.mytodolist.data.IMPORTANCE
 import com.example.mytodolist.data.TaskItem
 import com.example.mytodolist.data.Tasks
@@ -62,5 +63,8 @@ class AddTaskFragment : Fragment() {
         //Hide the software keyboard with InputMethodManager
         val inputMethodManager: InputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(binding.root.windowToken, 0)
+
+        //End of the save task method
+        findNavController().popBackStack(R.id.taskFragment, false)
     }
 }

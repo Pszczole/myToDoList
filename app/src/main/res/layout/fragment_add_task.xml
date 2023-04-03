@@ -45,8 +45,7 @@
             app:layout_constraintBottom_toTopOf="@+id/descriptionInput"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label"
-            app:layout_constraintVertical_bias="0.09"
-            app:layoutDescription="Title input"/>
+            app:layout_constraintVertical_bias="0.09" />
 
         <TextView
             android:id="@+id/label"
