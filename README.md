@@ -3,5 +3,5 @@ Aplikacja moblina do zarządzania zadaniami, napisana w Kotlinie, do przemieszcz
 się między layoutami został zastosowany navigation_graph.
 
 
-![PongGame](PongGameScreen.PNG)
+
 
