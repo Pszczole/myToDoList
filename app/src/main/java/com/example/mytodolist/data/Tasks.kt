@@ -89,6 +89,7 @@ data class TaskItem(val id: String, val title: String, val description: String,
 
 }
 
+
 //This class is used to set an importance of the task
 enum class IMPORTANCE{
     LOW, NORMAL, HIGH

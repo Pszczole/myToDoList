@@ -21,10 +21,18 @@
         android:id="@+id/addTaskFragment"
         android:name="com.example.mytodolist.AddTaskFragment"
         android:label="fragment_add_task"
-        tools:layout="@layout/fragment_add_task" />
+        tools:layout="@layout/fragment_add_task" >
+        <action
+            android:id="@+id/action_addTaskFragment_to_taskFragment"
+            app:destination="@id/taskFragment" />
+    </fragment>
     <fragment
         android:id="@+id/displayTaskFragment"
         android:name="com.example.mytodolist.DisplayTaskFragment"
         android:label="fragment_display_task"
-        tools:layout="@layout/fragment_display_task" />
+        tools:layout="@layout/fragment_display_task" >
+        <argument
+            android:name="taskToEdit"
+            app:argType="com.example.mytodolist.data.TaskItem" />
+    </fragment>
 </navigation>

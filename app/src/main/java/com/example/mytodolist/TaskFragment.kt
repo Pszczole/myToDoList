@@ -7,13 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mytodolist.data.TaskItem
 import com.example.mytodolist.data.Tasks
 import com.example.mytodolist.databinding.FragmentItemListBinding
 
-/**
- * A fragment representing a list of Items.
- */
-class TaskFragment : Fragment() {
+class TaskFragment : Fragment(), ToDoListListener {
     private lateinit var binding: FragmentItemListBinding
 
     override fun onCreateView(
@@ -25,7 +23,7 @@ class TaskFragment : Fragment() {
         //Set the adapter
         with(binding.list) {
             layoutManager = LinearLayoutManager(context)
-            adapter = MyTaskRecyclerViewAdapter(Tasks.ITEMS)
+            adapter = MyTaskRecyclerViewAdapter(Tasks.ITEMS, this@TaskFragment)
         }
 
         binding.addButton.setOnClickListener { addButtonClick() }
@@ -35,6 +33,18 @@ class TaskFragment : Fragment() {
     private fun addButtonClick() {
         findNavController().navigate(R.id.action_taskFragment_to_addTaskFragment)
 
+    }
+
+    override fun onItemClick(position: Int) {
+        val actionTaskFragmentToDisplayTaskFragment =
+            TaskFragmentDirections.actionTaskFragmentToDisplayTaskFragment().apply {
+                taskToEdit = Tasks.ITEMS[position]
+            }
+                findNavController().navigate(actionTaskFragmentToDisplayTaskFragment)
+    }
+
+    override fun onItemLongClick(position: Int) {
+        TODO("Not yet implemented")
     }
 
 }

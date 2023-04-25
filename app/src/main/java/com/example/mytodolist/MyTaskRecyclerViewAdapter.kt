@@ -9,14 +9,12 @@ import android.widget.TextView
 import com.example.mytodolist.data.IMPORTANCE
 import com.example.mytodolist.data.TaskItem
 
+
 import com.example.mytodolist.databinding.FragmentItemBinding
 
-/**
- * [RecyclerView.Adapter] that can display a [TaskItem].
- * TODO: Replace the implementation with code for your data type.
- */
 class MyTaskRecyclerViewAdapter(
-    private val values: List<TaskItem>
+    private val values: List<TaskItem>,
+    private val eventListener: ToDoListListener
 ) : RecyclerView.Adapter<MyTaskRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,6 +38,16 @@ class MyTaskRecyclerViewAdapter(
             IMPORTANCE.NORMAL -> R.drawable.circle_drawable_orange
             IMPORTANCE.HIGH -> R.drawable.circle_drawable_red
         }
+
+        holder.itemContainer.setOnClickListener{
+            eventListener.onItemClick(position)
+        }
+
+        holder.itemContainer.setOnLongClickListener{
+            eventListener.onItemLongClick(position)
+            return@setOnLongClickListener true
+        }
+
         holder.imgView.setImageResource(resource)
         holder.contentView.text = item.title
     }
