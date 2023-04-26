@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.mytodolist.data.IMPORTANCE
 import com.example.mytodolist.data.TaskItem
 import com.example.mytodolist.data.Tasks
@@ -16,7 +17,9 @@ import com.example.mytodolist.databinding.FragmentAddTaskBinding
 
 class AddTaskFragment : Fragment() {
 
+    val args: AddTaskFragmentArgs by navArgs()
     private lateinit var binding: FragmentAddTaskBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,8 +33,14 @@ class AddTaskFragment : Fragment() {
     //Added the click event handler for saveButton
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.saveButton.setOnClickListener{
-            saveTask()
+        binding.saveButton.setOnClickListener{ saveTask() }
+        binding.titleInput.setText(args.taskToEdit?.title)
+        binding.descriptionInput.setText(args.taskToEdit?.description)
+        when (args.taskToEdit?.importance){
+            IMPORTANCE.LOW -> binding.importanceGroup.check(R.id.low_radioButton)
+            IMPORTANCE.NORMAL -> binding.importanceGroup.check(R.id.normal_radioButton)
+            IMPORTANCE.HIGH -> binding.importanceGroup.check(R.id.high_radioButton)
+            null -> binding.importanceGroup.check(R.id.normal_radioButton)
         }
     }
 
@@ -57,8 +66,13 @@ class AddTaskFragment : Fragment() {
             importance
         )
 
-        //Add the new item to Tasks list
-        Tasks.addTask(taskItem)
+        if(!args.edit){
+            //Add the new item to Tasks list
+            Tasks.addTask(taskItem)
+        }else{
+            //Update existing item in Tasks List
+            Tasks.updateTask(args.taskToEdit, taskItem)
+        }
 
         //Hide the software keyboard with InputMethodManager
         val inputMethodManager: InputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

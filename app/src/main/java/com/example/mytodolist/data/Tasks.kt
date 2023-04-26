@@ -48,6 +48,19 @@ object Tasks {
         return builder.toString()
     }
 
+    fun updateTask(taskToEdit: TaskItem?, newTask:TaskItem){
+        taskToEdit?.let{
+            oldTask ->
+            //Preform this operation only when taskToEdit is not null
+            //Find the index of old task
+            val indexOfOldValue = ITEMS.indexOf(oldTask)
+            //place new task in place of oldTask
+            ITEMS.add(indexOfOldValue,newTask)
+            //Remove the oldTask that was moved to the next position in the ITEMS list
+            ITEMS.removeAt(indexOfOldValue + 1)
+        }
+    }
+
 
 
 }

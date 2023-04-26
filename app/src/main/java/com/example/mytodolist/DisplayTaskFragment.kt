@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.mytodolist.data.IMPORTANCE
 import com.example.mytodolist.data.TaskItem
@@ -29,9 +30,19 @@ class DisplayTaskFragment : Fragment() {
         }
 
         binding.displayImportance.setImageResource(resource)
+
+        binding.displayEdit.setOnClickListener{
+            val taskToEdit =
+                DisplayTaskFragmentDirections.actionDisplayTaskFragmentToAddTaskFragment(
+                    taskToEdit = task,
+                    edit = true)
+            findNavController().navigate(taskToEdit)
+                )
+        }
     }
 
-    //TODO{"Strona 20 ostatnie linijki podpunkt 4.1.6 do zrobienia"}
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

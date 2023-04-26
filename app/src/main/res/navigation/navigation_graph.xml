@@ -34,5 +34,9 @@
         <argument
             android:name="taskToEdit"
             app:argType="com.example.mytodolist.data.TaskItem" />
+        <argument
+            android:name="edit"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
 </navigation>

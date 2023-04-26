@@ -30,6 +30,7 @@ class TaskFragment : Fragment(), ToDoListListener {
         return binding.root
     }
 
+
     private fun addButtonClick() {
         findNavController().navigate(R.id.action_taskFragment_to_addTaskFragment)
 
@@ -37,9 +38,7 @@ class TaskFragment : Fragment(), ToDoListListener {
 
     override fun onItemClick(position: Int) {
         val actionTaskFragmentToDisplayTaskFragment =
-            TaskFragmentDirections.actionTaskFragmentToDisplayTaskFragment().apply {
-                taskToEdit = Tasks.ITEMS[position]
-            }
+            TaskFragmentDirections.actionTaskFragmentToDisplayTaskFragment(Tasks.ITEMS[position])
                 findNavController().navigate(actionTaskFragmentToDisplayTaskFragment)
     }
 
